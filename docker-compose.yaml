@@ -1,0 +1,28 @@
+
+# Comando para criar os containers dentro de um agrupamento: docker-compose sistema_votacao up -d
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:16
+    environment:
+      POSTGRES_USER: sistema_votacao
+      POSTGRES_PASSWORD: uj9Gi7Pw8DiMoxn
+      POSTGRES_DB: db_server
+    volumes:
+      - "pg_data:/var/lib/postgresql/data"
+      - ./.scripts/postgres:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - desafio_votacao
+    restart: always
+    stdin_open: true
+    tty: true
+
+volumes:
+  pg_data:
+
+networks:
+  desafio_votacao:
+    driver: bridge

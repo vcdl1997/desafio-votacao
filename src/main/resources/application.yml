@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: desafio-votacao
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db_server
+    username: sistema_votacao
+    password: uj9Gi7Pw8DiMoxn
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      auto-commit: true
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+
+server:
+  servlet:
+    context-path: /desafio-votacao
+  port: 8080
