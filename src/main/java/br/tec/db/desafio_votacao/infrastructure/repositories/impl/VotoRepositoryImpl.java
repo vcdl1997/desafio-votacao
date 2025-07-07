@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class VotoRepositoryImpl implements VotoRepository {
 
-	private SpringDataVotoRepository jpaRepository;
+	private final SpringDataVotoRepository jpaRepository;
 	
 	@Override
 	public List<Voto> listarPorIdSessaoVotacao(final Long idSessaoVotacao){

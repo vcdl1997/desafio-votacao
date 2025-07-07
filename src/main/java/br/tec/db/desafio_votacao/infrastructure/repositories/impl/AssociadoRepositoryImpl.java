@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AssociadoRepositoryImpl implements AssociadoRepository {
 
-	private SpringDataAssociadoRepository jpaRepository;
+	private final SpringDataAssociadoRepository jpaRepository;
 	
 	@Override
 	public Page<Associado> listar(final FiltroAssociadoVO filtro, final Pageable pageable){
@@ -28,22 +28,26 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	}
 	
 	private Specification<Associado> obterSpecs(final FiltroAssociadoVO filtro) {
+		final Long id = Objects.nonNull(filtro) ? filtro.id() : null;
+		final Long cpf = Objects.nonNull(filtro) ? filtro.cpf() : null;
+		final String nome = Objects.nonNull(filtro) ? filtro.nome() : null;
+		final String email = Objects.nonNull(filtro) ? filtro.email() : null;
 		Specification<Associado> specs = (root, query, builder) -> null;
 		
-		if(Objects.nonNull(filtro.getId())){
-			specs = specs.and(AssociadoSpecification.filtrarPorCpf(filtro.getId()));
+		if(Objects.nonNull(id)){
+			specs = specs.and(AssociadoSpecification.filtrarPorId(id));
 		}
 		
-		if(Objects.nonNull(filtro.getCpf())){
-			specs = specs.and(AssociadoSpecification.filtrarPorCpf(filtro.getCpf()));
+		if(Objects.nonNull(cpf)){
+			specs = specs.and(AssociadoSpecification.filtrarPorCpf(cpf));
 		}
 		
-		if(StringUtils.isNotEmpty(filtro.getNome())) {
-			specs = specs.and(AssociadoSpecification.filtrarPorNome(filtro.getNome()));
+		if(StringUtils.isNotEmpty(nome)) {
+			specs = specs.and(AssociadoSpecification.filtrarPorNome(nome));
 		}
 		
-		if(StringUtils.isNotEmpty(filtro.getEmail())) {
-			specs = specs.and(AssociadoSpecification.filtrarPorEmail(filtro.getEmail()));
+		if(StringUtils.isNotEmpty(email)) {
+			specs = specs.and(AssociadoSpecification.filtrarPorEmail(email));
 		}
 		
 		return specs;
@@ -57,11 +61,6 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	@Override
 	public Associado salvar(Associado associado) {
 		return jpaRepository.save(associado);
-	}
-	
-	@Override
-	public void deletar(Associado associado) {
-		jpaRepository.delete(associado);
 	}
 	
 }

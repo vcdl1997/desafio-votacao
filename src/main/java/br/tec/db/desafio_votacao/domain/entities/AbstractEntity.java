@@ -10,12 +10,14 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 @Getter
 public class AbstractEntity<T>{
 
@@ -24,15 +26,7 @@ public class AbstractEntity<T>{
 	@Column(name = "ID")
 	private T id;
 	
-	@Column(name = "DT_HR_INCLUSAO")
+	@Column(name = "DT_HR_INCLUSAO", updatable = false)
 	private LocalDateTime dataHoraInclusao;
-	
-	protected AbstractEntity<T> atualizar() {
-		return null;
-	}
-	
-	protected Class<? extends AbstractEntity<T>> atualizar(Class<? extends AbstractEntity<T>> registro) {
-		 return null;
-	}
 	
 }

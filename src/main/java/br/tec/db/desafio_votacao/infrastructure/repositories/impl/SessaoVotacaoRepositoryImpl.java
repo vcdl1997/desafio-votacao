@@ -1,6 +1,7 @@
 package br.tec.db.desafio_votacao.infrastructure.repositories.impl;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SessaoVotacaoRepositoryImpl implements SessaoVotacaoRepository {
 
-	private SpringDataSessaoVotacaoRepository jpaRepository;
+	private final SpringDataSessaoVotacaoRepository jpaRepository;
 	
 	@Override
 	public Page<SessaoVotacao> listar(final FiltroSessaoVotacaoVO filtro, final Pageable pageable){
@@ -26,17 +27,24 @@ public class SessaoVotacaoRepositoryImpl implements SessaoVotacaoRepository {
 	}
 	
 	private Specification<SessaoVotacao> obterSpecs(final FiltroSessaoVotacaoVO filtro) {
+		final Long idSessaoVotacao = Objects.nonNull(filtro) ? filtro.idSessaoVotacao() : null;
+		final Long idPauta = Objects.nonNull(filtro) ? filtro.idPauta() : null;
 		Specification<SessaoVotacao> specs = (root, query, builder) -> null;
 		
-		if(Objects.nonNull(filtro.getIdSessao())){
-			specs = specs.and(SessaoVotacaoSpecification.filtrarPorId(filtro.getIdSessao()));
+		if(Objects.nonNull(idSessaoVotacao)){
+			specs = specs.and(SessaoVotacaoSpecification.filtrarPorId(idSessaoVotacao));
 		}
 		
-		if(Objects.nonNull(filtro.getIdPauta())) {
-			specs = specs.and(SessaoVotacaoSpecification.filtrarPorIdPauta(filtro.getIdPauta()));
+		if(Objects.nonNull(idPauta)) {
+			specs = specs.and(SessaoVotacaoSpecification.filtrarPorIdPauta(idPauta));
 		}
 		
 		return specs;
+	}
+	
+	@Override
+	public Optional<SessaoVotacao> obterPorId(Long id) {
+		return jpaRepository.findById(id);
 	}
 	
 	@Override

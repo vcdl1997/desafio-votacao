@@ -27,6 +27,9 @@ public class SessaoVotacao extends AbstractEntity<Long> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Pauta pauta;
 	
+	@Column(name = "DT_HR_INICIO", updatable = false)
+	private LocalDateTime dataHoraInicio;
+	
 	@Column(name = "DT_HR_ENCERRAMENTO", updatable = false)
 	private LocalDateTime dataHoraEncerramento;
 	

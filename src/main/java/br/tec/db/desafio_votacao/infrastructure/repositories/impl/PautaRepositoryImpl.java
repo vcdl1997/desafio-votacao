@@ -1,6 +1,7 @@
 package br.tec.db.desafio_votacao.infrastructure.repositories.impl;
 
 import java.util.Objects;
+import java.util.Optional;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
@@ -19,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class PautaRepositoryImpl implements PautaRepository {
 
-	private SpringDataPautaRepository jpaRepository;
+	private final SpringDataPautaRepository jpaRepository;
 	
 	@Override
 	public Page<Pauta> listar(final FiltroPautaVO filtro, final Pageable pageable){
@@ -27,17 +28,24 @@ public class PautaRepositoryImpl implements PautaRepository {
 	}
 	
 	private Specification<Pauta> obterSpecs(final FiltroPautaVO filtro) {
+		final Long id = Objects.nonNull(filtro) ? filtro.id() : null;
+		final String assunto = Objects.nonNull(filtro) ? filtro.assunto() : null;
 		Specification<Pauta> specs = (root, query, builder) -> null;
 		
-		if(Objects.nonNull(filtro.getId())){
-			specs = specs.and(PautaSpecification.filtrarPorId(filtro.getId()));
+		if(Objects.nonNull(id)){
+			specs = specs.and(PautaSpecification.filtrarPorId(id));
 		}
 		
-		if(StringUtils.isNotEmpty(filtro.getAssunto())) {
-			specs = specs.and(PautaSpecification.filtrarPorAssunto(filtro.getAssunto()));
+		if(StringUtils.isNotEmpty(assunto)) {
+			specs = specs.and(PautaSpecification.filtrarPorAssunto(assunto));
 		}
 		
 		return specs;
+	}
+	
+	@Override
+	public Optional<Pauta> obterPorId(Long id) {
+		return jpaRepository.findById(id);
 	}
 	
 	@Override

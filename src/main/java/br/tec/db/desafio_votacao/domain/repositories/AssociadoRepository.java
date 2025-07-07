@@ -16,6 +16,4 @@ public interface AssociadoRepository {
 	
 	public Associado salvar(Associado associado);
 	
-	public void deletar(Associado associado);
-	
 }
