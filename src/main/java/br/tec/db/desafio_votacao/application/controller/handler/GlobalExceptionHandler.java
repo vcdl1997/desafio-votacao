@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import br.tec.db.desafio_votacao.application.dto.commons.response.ResponseErrorDTO;
+import br.tec.db.desafio_votacao.shared.exceptions.BusinessException;
 import br.tec.db.desafio_votacao.shared.exceptions.NotFoundException;
 
 @RestControllerAdvice
@@ -27,7 +28,7 @@ public class GlobalExceptionHandler {
         	.timestamp(LocalDateTime.now())
         	.build();
 		
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(resposta);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resposta);
     }
 	
 	@ExceptionHandler(NotFoundException.class)
@@ -39,6 +40,28 @@ public class GlobalExceptionHandler {
         	.build();
 		
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(resposta);
+    }
+	
+	@ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ResponseErrorDTO> handleBusinessException(BusinessException ex) {
+        ResponseErrorDTO resposta = ResponseErrorDTO.builder()
+        	.mensagem(ex.getMessage())
+        	.traceId(UUID.randomUUID())
+        	.timestamp(LocalDateTime.now())
+        	.build();
+		
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(resposta);
+    }
+	
+	@ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ResponseErrorDTO> handleRuntimeException(RuntimeException ex) {
+        ResponseErrorDTO resposta = ResponseErrorDTO.builder()
+        	.mensagem(ex.getMessage())
+        	.traceId(UUID.randomUUID())
+        	.timestamp(LocalDateTime.now())
+        	.build();
+		
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(resposta);
     }
 	
 }

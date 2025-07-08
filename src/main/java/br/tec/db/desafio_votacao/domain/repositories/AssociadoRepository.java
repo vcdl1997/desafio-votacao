@@ -10,10 +10,10 @@ import br.tec.db.desafio_votacao.domain.vo.FiltroAssociadoVO;
 
 public interface AssociadoRepository {
 	
-	public Page<Associado> listar(FiltroAssociadoVO filtro, Pageable pageable);
+	Page<Associado> listar(FiltroAssociadoVO filtro, Pageable pageable);
 	
-	public Optional<Associado> obterPorId(Long id);
+	Optional<Associado> obterPorId(Long id);
 	
-	public Associado salvar(Associado associado);
+	Associado salvar(Associado associado);
 	
 }

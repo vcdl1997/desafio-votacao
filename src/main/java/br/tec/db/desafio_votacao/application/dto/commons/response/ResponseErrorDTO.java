@@ -46,7 +46,7 @@ public class ResponseErrorDTO {
 	}
 	
 	public static ResponseErrorDTO criar(FieldError error){
-		Objects.requireNonNull(error, "FieldError não pode ser nulo.");
+		Objects.requireNonNull(error, "FieldError não pode ser nulo");
 		
 		return ResponseErrorDTO
 			.builder()

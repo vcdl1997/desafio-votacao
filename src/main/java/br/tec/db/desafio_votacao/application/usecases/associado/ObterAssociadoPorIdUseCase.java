@@ -16,7 +16,7 @@ public class ObterAssociadoPorIdUseCase {
 	private final AssociadoRepository repository;
 	private final AssociadoMapper mapper;
 	
-	public AssociadoResponseDTO executar(Long id) {
+	public AssociadoResponseDTO executar(final Long id) {
 		Associado associado = repository.obterPorId(id).orElseThrow(() -> new NotFoundException("Associado não encontrado"));
 		return mapper.associadoParaAssociadoResponseDTO(associado);
     }

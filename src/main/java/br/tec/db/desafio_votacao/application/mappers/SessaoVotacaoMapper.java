@@ -19,7 +19,6 @@ public interface SessaoVotacaoMapper {
 
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "pauta", ignore = true)
-	@Mapping(target = "dataHoraInicio", source = "dataHoraInicio", qualifiedByName = "stringParaLocalDateTime")
 	@Mapping(target = "dataHoraEncerramento", source = "dataHoraEncerramento", qualifiedByName = "stringParaLocalDateTime")
 	@Mapping(target = "dataHoraInclusao", ignore = true)
 	SessaoVotacao cadastroSessaoVotacaoRequestDTOParaSessaoVotacao(CadastroSessaoVotacaoRequestDTO dto);

@@ -9,6 +9,7 @@ import br.tec.db.desafio_votacao.application.dto.associado.response.AssociadoRes
 import br.tec.db.desafio_votacao.application.mappers.AssociadoMapper;
 import br.tec.db.desafio_votacao.domain.entities.Associado;
 import br.tec.db.desafio_votacao.domain.repositories.AssociadoRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -18,12 +19,13 @@ public class CadastrarAssociadoUseCase {
 	private final AssociadoRepository repository;
 	private final AssociadoMapper mapper;
 
-	public AssociadoResponseDTO executar(CadastroAssociadoRequestDTO dto) {
+	@Transactional
+	public AssociadoResponseDTO executar(final CadastroAssociadoRequestDTO dto) {
 		Associado associado = repository.salvar(prepararAssociadoParaInclusao(dto));
 		return mapper.associadoParaAssociadoResponseDTO(associado);
     }
 	
-	private Associado prepararAssociadoParaInclusao(CadastroAssociadoRequestDTO dto) {
+	private Associado prepararAssociadoParaInclusao(final CadastroAssociadoRequestDTO dto) {
 		Associado associado = mapper.cadastroAssociadoRequestDTOParaAssociado(dto);
 		associado.setDataHoraInclusao(LocalDateTime.now());
 		return associado;

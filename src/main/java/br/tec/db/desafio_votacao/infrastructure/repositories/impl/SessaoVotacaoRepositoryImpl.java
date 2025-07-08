@@ -1,5 +1,6 @@
 package br.tec.db.desafio_votacao.infrastructure.repositories.impl;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -44,12 +45,25 @@ public class SessaoVotacaoRepositoryImpl implements SessaoVotacaoRepository {
 	
 	@Override
 	public Optional<SessaoVotacao> obterPorId(Long id) {
+		Objects.requireNonNull(id, "ID da Sessão Votação não foi informado");
+
 		return jpaRepository.findById(id);
 	}
 	
 	@Override
 	public SessaoVotacao salvar(SessaoVotacao sessaoVotacao) {
 		return jpaRepository.save(sessaoVotacao);
+	}
+
+	@Override
+	public boolean existemSessoesAbertasParaEssaPauta(
+		LocalDateTime dataHoraInicio, 
+		LocalDateTime dataHoraFim,
+		Long idPauta
+	) {
+		return jpaRepository.existsByDataHoraEncerramentoGreaterThanAndDataHoraEncerramentoLessThanEqualAndPautaId(
+			dataHoraInicio, dataHoraFim, idPauta
+		);
 	}
 	
 }

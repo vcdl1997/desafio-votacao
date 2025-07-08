@@ -1,6 +1,7 @@
 package br.tec.db.desafio_votacao.domain.enums;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public enum RespostaVotoEnum {
 	SIM,
@@ -12,5 +13,9 @@ public enum RespostaVotoEnum {
         	.filter(e -> e.name().equalsIgnoreCase(resposta))
         	.findFirst()
         	.orElse(null);
+    }
+	
+	public String obterDescricao() throws IllegalArgumentException {
+        return Objects.equals(this, RespostaVotoEnum.SIM) ? "Sim" : "Não";
     }
 }

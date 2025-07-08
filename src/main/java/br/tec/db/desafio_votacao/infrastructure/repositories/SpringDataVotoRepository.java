@@ -9,6 +9,6 @@ import br.tec.db.desafio_votacao.domain.entities.VotoId;
 
 public interface SpringDataVotoRepository extends JpaRepository<Voto, VotoId>{
 
-	public List<Voto> findById_SessaoId(Long idSessao);
+	public List<Voto> findByIdSessaoId(Long idSessao);
 	
 }

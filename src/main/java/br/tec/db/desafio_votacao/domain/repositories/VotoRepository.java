@@ -3,11 +3,15 @@ package br.tec.db.desafio_votacao.domain.repositories;
 import java.util.List;
 
 import br.tec.db.desafio_votacao.domain.entities.Voto;
+import br.tec.db.desafio_votacao.domain.entities.VotoId;
+import br.tec.db.desafio_votacao.domain.vo.FiltroVotoVO;
 
 public interface VotoRepository {
 	
-	public List<Voto> listarPorIdSessaoVotacao(Long idSessaoVotacao);
+	List<Voto> listarVotosPorSessaoVotacao(final FiltroVotoVO vo);
 	
-	public Voto salvar(Voto voto);
+	Voto salvar(Voto voto);
+	
+	boolean associadoJaVotouNessaSessaoVotacao(VotoId id);
 	
 }

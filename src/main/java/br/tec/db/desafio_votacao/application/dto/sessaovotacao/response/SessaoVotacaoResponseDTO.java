@@ -24,13 +24,12 @@ public class SessaoVotacaoResponseDTO {
 	private String assunto;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone="GMT-3")
-	private LocalDateTime dataHoraInicio;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone="GMT-3")
 	private LocalDateTime dataHoraEncerramento;
 	
+	private boolean emAberto;
+	
 	public static SessaoVotacaoResponseDTO criar(SessaoVotacao sessaoVotacao) {
-		Objects.requireNonNull(sessaoVotacao);
+		Objects.requireNonNull(sessaoVotacao, "SessaoVotacao não pode ser nulo");
 		
 		String assunto = Objects.nonNull(sessaoVotacao.getPauta()) ? sessaoVotacao.getPauta().getAssunto() : null;
 		
@@ -38,8 +37,8 @@ public class SessaoVotacaoResponseDTO {
 			.builder()
 			.id(sessaoVotacao.getId())
 			.assunto(assunto)
-			.dataHoraInicio(sessaoVotacao.getDataHoraInicio())
 			.dataHoraEncerramento(sessaoVotacao.getDataHoraEncerramento())
+			.emAberto(sessaoVotacao.isEmAberto())
 			.build()
 		;
 	}

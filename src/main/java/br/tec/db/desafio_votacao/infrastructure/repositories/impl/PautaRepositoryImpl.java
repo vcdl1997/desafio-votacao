@@ -45,6 +45,8 @@ public class PautaRepositoryImpl implements PautaRepository {
 	
 	@Override
 	public Optional<Pauta> obterPorId(Long id) {
+		Objects.requireNonNull(id, "ID da Pauta não foi informado");
+
 		return jpaRepository.findById(id);
 	}
 	

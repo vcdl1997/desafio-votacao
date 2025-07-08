@@ -1,5 +1,6 @@
 package br.tec.db.desafio_votacao.domain.repositories;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
@@ -10,10 +11,12 @@ import br.tec.db.desafio_votacao.domain.vo.FiltroSessaoVotacaoVO;
 
 public interface SessaoVotacaoRepository {
 	
-	public Page<SessaoVotacao> listar(FiltroSessaoVotacaoVO filtro, Pageable pageable);
+	Page<SessaoVotacao> listar(FiltroSessaoVotacaoVO filtro, Pageable pageable);
 	
-	public Optional<SessaoVotacao> obterPorId(Long id);
+	Optional<SessaoVotacao> obterPorId(Long id);
 	
-	public SessaoVotacao salvar(SessaoVotacao sessaoVotacao);
+	SessaoVotacao salvar(SessaoVotacao sessaoVotacao);
+	
+	boolean existemSessoesAbertasParaEssaPauta(LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, Long idPauta);
 	
 }

@@ -1,4 +1,4 @@
-package br.tec.db.desafio_votacao.application.dto.sessaovotacao.request;
+package br.tec.db.desafio_votacao.application.dto.voto.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -14,16 +14,21 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CadastroSessaoVotacaoRequestDTO {
-	
+public class VotoRequestDTO {
+
 	private static final String MENSAGEM_FORMATO_ID = "deve conter apenas números";
-	private static final String MENSAGEM_FORMATO_DATA_HORA = "deve estar no formato yyyy-MM-dd HH:mm:ss (exemplo: 2025-07-07 21:00:00)";
+	private static final String MENSAGEM_FORMATO_RESPOSTA_VOTO = "deve conter apenas os valores 'SIM' ou 'NAO'";
 
 	@NotBlank
 	@Pattern(regexp = "^\\d*$", message = MENSAGEM_FORMATO_ID)
-	private String idPauta;
+	private String idSessaoVotacao;
 	
-	@Pattern(regexp = "^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}|)$", message = MENSAGEM_FORMATO_DATA_HORA)
-	private String dataHoraEncerramento;
+	@NotBlank
+	@Pattern(regexp = "^\\d*$", message = MENSAGEM_FORMATO_ID)
+	private String idAssocidado;
+	
+	@NotBlank
+	@Pattern(regexp = "^(SIM|NAO)$", message = MENSAGEM_FORMATO_RESPOSTA_VOTO)
+	private String respostaVoto;
 	
 }

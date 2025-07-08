@@ -10,10 +10,10 @@ import br.tec.db.desafio_votacao.domain.vo.FiltroPautaVO;
 
 public interface PautaRepository {
 	
-	public Optional<Pauta> obterPorId(Long id);
+	Optional<Pauta> obterPorId(Long id);
 	
-	public Page<Pauta> listar(FiltroPautaVO filtro, Pageable pageable);
+	Page<Pauta> listar(FiltroPautaVO filtro, Pageable pageable);
 	
-	public Pauta salvar(Pauta voto);
+	Pauta salvar(Pauta voto);
 	
 }

@@ -23,7 +23,7 @@ public class ListarAssociadosUseCase {
 	private final AssociadoRepository repository;
 	private final AssociadoMapper mapper;
 	
-	public Page<AssociadoResponseDTO> executar(final FiltroAssociadoRequestDTO dto, Pageable pageable) {
+	public Page<AssociadoResponseDTO> executar(final FiltroAssociadoRequestDTO dto, final Pageable pageable) {
 		final FiltroAssociadoVO vo = mapper.filtroAssociadoDTOParaFiltroAssociadoVO(dto);
 		final Page<Associado> resposta = repository.listar(vo, pageable);
 		return formatarResposta(resposta);

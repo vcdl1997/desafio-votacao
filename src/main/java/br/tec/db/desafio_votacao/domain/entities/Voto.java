@@ -1,5 +1,7 @@
 package br.tec.db.desafio_votacao.domain.entities;
 
+import java.time.LocalDateTime;
+
 import br.tec.db.desafio_votacao.domain.enums.RespostaVotoEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
@@ -28,5 +30,8 @@ public class Voto {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "RESPOSTA", updatable = false)
 	private RespostaVotoEnum resposta;
+	
+	@Column(name = "DT_HR_INCLUSAO", updatable = false)
+	private LocalDateTime dataHoraInclusao;
 	
 }

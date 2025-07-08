@@ -55,6 +55,8 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	
 	@Override
 	public Optional<Associado> obterPorId(Long id) {
+		Objects.requireNonNull(id, "ID do Associado não foi informado");
+
 		return jpaRepository.findById(id);
 	}
 	
