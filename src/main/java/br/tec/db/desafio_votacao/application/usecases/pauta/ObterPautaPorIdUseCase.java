@@ -17,7 +17,7 @@ public class ObterPautaPorIdUseCase {
 	private final PautaMapper mapper;
 	
 	public PautaResponseDTO executar(final Long id) {
-		Pauta pauta = repository.obterPorId(id).orElseThrow(() -> new NotFoundException("Pauta não encontrada."));
+		Pauta pauta = repository.obterPorId(id).orElseThrow(() -> new NotFoundException("Pauta não encontrada"));
 		return mapper.pautaParaPautaResponseDTO(pauta);
 	}
 

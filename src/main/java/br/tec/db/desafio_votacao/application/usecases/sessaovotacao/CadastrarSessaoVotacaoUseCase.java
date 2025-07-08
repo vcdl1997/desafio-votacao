@@ -62,7 +62,7 @@ public class CadastrarSessaoVotacaoUseCase {
 	
 	private Pauta obterPauta(final CadastroSessaoVotacaoRequestDTO dto) {
 		Long idPauta = Long.valueOf(dto.getIdPauta());
-		return pautaRepository.obterPorId(idPauta).orElseThrow(() -> new NotFoundException("Pauta não encontrada."));
+		return pautaRepository.obterPorId(idPauta).orElseThrow(() -> new NotFoundException("Pauta não encontrada"));
 	}
 	
 }

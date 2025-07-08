@@ -72,7 +72,7 @@ public class CadastrarVotoUseCase {
 	}
 	
 	private SessaoVotacao obterSessaoVotacao(final Long idSessaoVotacao) {
-		return sessaoVotacaoRepository.obterPorId(idSessaoVotacao).orElseThrow(() -> new NotFoundException("Sessão Votação não encontrada."));
+		return sessaoVotacaoRepository.obterPorId(idSessaoVotacao).orElseThrow(() -> new NotFoundException("Sessão Votação não encontrada"));
 	}
 	
 }

@@ -15,7 +15,7 @@ public class ObterSessaoVotacaoPorIdUseCase {
 	private final SessaoVotacaoRepository repository;
 	
 	public SessaoVotacaoResponseDTO executar(final Long id) {
-		SessaoVotacao sessaoVotacao = repository.obterPorId(id).orElseThrow(() -> new NotFoundException("Sessão Votação não encontrada."));
+		SessaoVotacao sessaoVotacao = repository.obterPorId(id).orElseThrow(() -> new NotFoundException("Sessão Votação não encontrada"));
 		return SessaoVotacaoResponseDTO.criar(sessaoVotacao);
 	}
 
