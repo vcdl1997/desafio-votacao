@@ -12,18 +12,24 @@ spring:
     password: uj9Gi7Pw8DiMoxn
     driver-class-name: org.postgresql.Driver
     hikari:
-      minimum-idle: 5
-      maximum-pool-size: 20
-      auto-commit: true
+      minimum-idle: 5 # número mínimo de conexões mantidas pelo pool enquanto a demanda é baixa
+      maximum-pool-size: 20 # número máximo de conexões que podem ser mantidas pelo pool (ociosas e em uso)
+      auto-commit: false # deixa apenas os locais anotados com @Transactional trabalhando dentro de um contexto transacional
+      connection-timeout: 250 # tempo máximo que pode aguardar para obter uma conexão do pool
+      max-lifetime: 600000 # tempo máximo que uma conexão pode ficar viva
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create-drop # esta sendo usado apenas por ser um teste
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # converte os nomes para snake_case igual ao padrão do banco de dados
+    open-in-view: false 
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+        generate_statistics: true
+        connection:
+          provider_disables_autocommit: true
 
 logging:
   level:

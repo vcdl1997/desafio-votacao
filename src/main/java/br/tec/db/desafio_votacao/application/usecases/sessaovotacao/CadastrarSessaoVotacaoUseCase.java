@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.tec.db.desafio_votacao.application.dto.sessaovotacao.request.CadastroSessaoVotacaoRequestDTO;
 import br.tec.db.desafio_votacao.application.dto.sessaovotacao.response.SessaoVotacaoResponseDTO;
@@ -14,7 +15,6 @@ import br.tec.db.desafio_votacao.domain.repositories.PautaRepository;
 import br.tec.db.desafio_votacao.domain.repositories.SessaoVotacaoRepository;
 import br.tec.db.desafio_votacao.shared.exceptions.BusinessException;
 import br.tec.db.desafio_votacao.shared.exceptions.NotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -25,7 +25,7 @@ public class CadastrarSessaoVotacaoUseCase {
 	private final SessaoVotacaoRepository sessaoVotacaoRepository;
 	private final SessaoVotacaoMapper sessaoVotacaoMapper;
 	
-	@Transactional
+	@Transactional(timeout = 1)
 	public SessaoVotacaoResponseDTO cadastrar(final CadastroSessaoVotacaoRequestDTO dto) {
 		SessaoVotacao sessaoVotacao = prepararSessaoVotacaoParaInclusao(dto);
 		

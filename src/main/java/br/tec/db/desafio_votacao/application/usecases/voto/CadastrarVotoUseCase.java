@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.tec.db.desafio_votacao.application.dto.voto.request.VotoRequestDTO;
 import br.tec.db.desafio_votacao.application.dto.voto.response.VotoResponseDTO;
@@ -17,7 +18,6 @@ import br.tec.db.desafio_votacao.domain.repositories.SessaoVotacaoRepository;
 import br.tec.db.desafio_votacao.domain.repositories.VotoRepository;
 import br.tec.db.desafio_votacao.shared.exceptions.BusinessException;
 import br.tec.db.desafio_votacao.shared.exceptions.NotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -29,7 +29,7 @@ public class CadastrarVotoUseCase {
 	private final VotoRepository votoRepository;
 	private final VotoMapper votoMapper;
 	
-	@Transactional
+	@Transactional(timeout = 1)
 	public VotoResponseDTO executar(final VotoRequestDTO dto) {
 		Voto voto = prepararParaInclusao(dto);
 		

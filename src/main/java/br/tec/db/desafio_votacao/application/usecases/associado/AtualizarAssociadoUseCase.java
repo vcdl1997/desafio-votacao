@@ -1,6 +1,7 @@
 package br.tec.db.desafio_votacao.application.usecases.associado;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.tec.db.desafio_votacao.application.dto.associado.request.AtualizacaoAssociadoRequestDTO;
 import br.tec.db.desafio_votacao.application.dto.associado.response.AssociadoResponseDTO;
@@ -9,7 +10,6 @@ import br.tec.db.desafio_votacao.domain.entities.Associado;
 import br.tec.db.desafio_votacao.domain.repositories.AssociadoRepository;
 import br.tec.db.desafio_votacao.shared.exceptions.NotFoundException;
 import br.tec.db.desafio_votacao.shared.utils.ObjetoUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -19,7 +19,7 @@ public class AtualizarAssociadoUseCase {
 	private final AssociadoRepository repository;
 	private final AssociadoMapper mapper;
 
-	@Transactional
+	@Transactional(timeout = 1)
 	public AssociadoResponseDTO executar(final Long id, final AtualizacaoAssociadoRequestDTO dto) {
 		Associado associado = prepararAssociadoParaAtualizacao(obterUsuarioPorId(id), dto);
 		return mapper.associadoParaAssociadoResponseDTO(associado);
