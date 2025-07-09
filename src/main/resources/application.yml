@@ -22,7 +22,7 @@ spring:
       ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # converte os nomes para snake_case igual ao padrão do banco de dados
-    defer-datasource-initialization: true
+    defer-datasource-initialization: true # garante que seja feita a inicialização das tabelas baseadas nas entidades antes de executar scripts de inicialização
     open-in-view: false 
     show-sql: true
     properties:

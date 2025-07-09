@@ -68,8 +68,7 @@ A pasta `src/main/java` foi organizada em camadas para separar cada uma das resp
       - **response/**: DTOs utilizados para retorno dos dados.  
     - **sessoes/**  
     - **votos/**  
-    - **pautas/**  
-    (e assim por diante...)  
+    - **pautas/**
   - **mappers/**: Mapeadores responsáveis por converter entre entidades e DTOs.  
   - **usecases/**: Casos de uso da aplicação, organizados por recurso.  
     - **associados/**  
@@ -97,8 +96,44 @@ A pasta `src/main/java` foi organizada em camadas para separar cada uma das resp
 
 ---
 
-## ✅ 3. Testes de carga e stress da aplicação
+## ✅ 3. Testes de carga e stress da aplicação (Locust e Docker Stats)
 
+O **Locust** é uma ferramenta simples e poderosa para realizar testes de carga na sua aplicação. Com o Locust, você consegue simular vários usuários acessando a nossa API ao mesmo tempo, ajudando a identificar como ele se comporta sob alta demanda. 
 
+### Acessando a Interface do Locust
 
+Após iniciar os containers, você pode acessar a interface web de testes através da seguinte URL:
+
+- **Interface Locust:** [http://localhost:8089/](http://localhost:8089/)
+
+### Configurando o Teste
+
+Na página de início do Locust, você verá um formulário para configurar o teste com os seguintes campos:
+
+1. **Ramp up (users started/second):**
+   - Define a taxa de criação de usuários por segundo. Exemplo: `10` significa que 10 usuários serão iniciados a cada segundo até alcançar o número total de usuários especificado.
+
+2. **Number of users (peak concurrency):**
+   - Especifique o número total de usuários concorrentes a serem simulados no teste. Exemplo: `100` para testar com 100 usuários simultâneos.
+
+3. **Host:**
+   - Insira a URL do servidor a ser testado. Exemplo: `http://localhost:8000` ou o endereço do servidor que você está utilizando.
+
+4. **Advanced Options:**
+   - **Run time (e.g. 20, 20s, 3m, 2h, 1h20m, 3h30m10s, etc.):**
+     - Define o tempo total de execução do teste. Exemplos:
+       - `20` (20 segundos)
+       - `3m` (3 minutos)
+       - `2h` (2 horas)
+       - `1h20m` (1 hora e 20 minutos)
+
+### Monitorando o Container em Paralelo
+
+Você também pode acompanhar o status do seu container enquanto o Locust executa os testes, utilizando o comando `docker stats` para visualizar as métricas de uso de recursos (CPU, memória, rede, etc.) do container. Esse comando permite que você veja como o container está se comportando sob carga.
+
+Para monitorar o status do container, basta abrir um terminal paralelo e rodar o seguinte comando:
+
+```bash
+  docker stats api
+```
 
