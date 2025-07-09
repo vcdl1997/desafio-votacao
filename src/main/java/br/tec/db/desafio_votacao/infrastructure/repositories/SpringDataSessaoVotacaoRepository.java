@@ -1,6 +1,7 @@
 package br.tec.db.desafio_votacao.infrastructure.repositories;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,9 @@ public interface SpringDataSessaoVotacaoRepository extends JpaRepository<SessaoV
 	@EntityGraph(attributePaths = {"pauta"})
     @Override
     Page<SessaoVotacao> findAll(Specification<SessaoVotacao> spec, Pageable pageable);
+
+	@EntityGraph(attributePaths = {"pauta"})
+    @Override
+	Optional<SessaoVotacao> findById(Long id);
 	
 }
