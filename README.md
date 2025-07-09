@@ -137,6 +137,6 @@ Para monitorar o status do container, basta abrir um terminal paralelo e rodar o
   docker stats api
 ```
 
-Abaixo segue um vídeo de exemplo de como usar o Locust para realizar testes de stress: [Teste de Stress com Locust](https://github.com/vcdl1997/desafio-votacao/tutorial_locust.mp4)
+**Observação:** Dentro deste repositório também estará disponível um vídeo de exemplo de como usar o Locust para realizar testes de stress (**tutorial_locust.mp4**).
 
 
