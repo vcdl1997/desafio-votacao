@@ -25,7 +25,7 @@ public interface SessaoVotacaoMapper {
 	
 	@Named("stringParaLocalDateTime")
     default LocalDateTime stringParaLocalDateTime(String localDateTimeString) {
-        return DateUtils.converteStringParaLocalDateTime(localDateTimeString);
+        return DateUtils.converteStringParaLocalDateTimeSemSegundos(localDateTimeString);
     }
 	
 }

@@ -36,6 +36,7 @@ public class ListarSessaoVotacaoPorIdPautaUseCase {
 	
 	private List<SessaoVotacaoResponseDTO> converterParaDTO(final Page<SessaoVotacao> resposta){
 		return resposta
+			.getContent()
 			.stream()
 			.map(SessaoVotacaoResponseDTO::criar)
 			.collect(Collectors.toList())

@@ -37,7 +37,7 @@ public class ResponseErrorDTO {
 	
 	private List<ResponseErrorDTO> erros;
 	
-	public static List<ResponseErrorDTO> criar(List<FieldError> errors){
+	public static List<ResponseErrorDTO> criar(final List<FieldError> errors){
 		if(Objects.isNull(errors) || errors.isEmpty()) {
 			throw new IllegalArgumentException("Lista de erros inválida: nula ou vazia.");
 		}
@@ -45,7 +45,7 @@ public class ResponseErrorDTO {
 		return errors.stream().map(error -> ResponseErrorDTO.criar(error)).collect(Collectors.toList());
 	}
 	
-	public static ResponseErrorDTO criar(FieldError error){
+	public static ResponseErrorDTO criar(final FieldError error){
 		Objects.requireNonNull(error, "FieldError não pode ser nulo");
 		
 		return ResponseErrorDTO

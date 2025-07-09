@@ -2,7 +2,6 @@ package br.tec.db.desafio_votacao.application.usecases.voto;
 
 import java.time.LocalDateTime;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,14 +32,18 @@ public class CadastrarVotoUseCase {
 	public VotoResponseDTO executar(final VotoRequestDTO dto) {
 		Voto voto = prepararParaInclusao(dto);
 		
-		validaSeVotoPodeSerComputado(voto.getId());
+		validaSeVotoPodeSerComputado(voto);
 		
 		return VotoResponseDTO.criar(votoRepository.salvar(voto));
 	}
 	
-	private void validaSeVotoPodeSerComputado(final VotoId id) {
-		if(votoRepository.associadoJaVotouNessaSessaoVotacao(id)) {
+	private void validaSeVotoPodeSerComputado(final Voto voto) {
+		if(votoRepository.associadoJaVotouNessaSessaoVotacao(voto.getId())) {
 			throw new BusinessException("O associado informado já votou nesta sessão de votação.");
+		}
+
+		if(!voto.getId().getSessao().isEmAberto()){
+			throw new BusinessException("Esta sessão de votação já foi encerrada e não pode mais receber votos.");
 		}
 	}
 	
@@ -54,8 +57,8 @@ public class CadastrarVotoUseCase {
 	}
 	
 	private VotoId obterIdentificadorVoto(final VotoRequestDTO dto) {
-		final Long idAssociado = StringUtils.isNumeric(dto.getIdAssocidado()) ? Long.valueOf(dto.getIdAssocidado()) : null;
-		final Long idSessaoVotacao = StringUtils.isNumeric(dto.getIdSessaoVotacao()) ? Long.valueOf(dto.getIdSessaoVotacao()) : null;
+		final Long idAssociado = Long.valueOf(dto.getIdAssocidado());
+		final Long idSessaoVotacao = Long.valueOf(dto.getIdSessaoVotacao());
 		final Associado associado = obterAssociado(idAssociado);
 		final SessaoVotacao sessaoVotacao = obterSessaoVotacao(idSessaoVotacao);
 		

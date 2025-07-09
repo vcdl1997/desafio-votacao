@@ -33,7 +33,7 @@ public class VotoV1Controller {
 		final UriComponentsBuilder uriBuilder
 	){
 		VotoResponseDTO response = cadastrarVoto.executar(dto);
-		return ResponseEntity.ok(response);
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 	
 	@GetMapping

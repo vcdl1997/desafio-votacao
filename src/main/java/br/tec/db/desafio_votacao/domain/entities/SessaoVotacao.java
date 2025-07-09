@@ -1,6 +1,8 @@
 package br.tec.db.desafio_votacao.domain.entities;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 import br.tec.db.desafio_votacao.shared.exceptions.BusinessException;
 import br.tec.db.desafio_votacao.shared.utils.ObjetoUtils;
@@ -33,15 +35,21 @@ public class SessaoVotacao extends AbstractEntity<Long> {
 	private LocalDateTime dataHoraEncerramento;
 	
 	public boolean isEmAberto() {
-		return LocalDateTime.now().isBefore(dataHoraEncerramento);
+		LocalDateTime dataHoraAtual = LocalDateTime.now();
+		LocalDateTime dataHoraAtualSemSegundos = dataHoraAtual.truncatedTo(ChronoUnit.MINUTES);
+		return Objects.isNull(dataHoraEncerramento) ? false : dataHoraAtualSemSegundos.isBefore(dataHoraEncerramento);
 	}
 	
 	public void validarRegrasDeNegocioParaInclusao() {
 		ObjetoUtils.requireNonNull("Valor não informado", dataHoraEncerramento);
 		
-		if(dataHoraEncerramento.isBefore(LocalDateTime.now())) {
-			throw new BusinessException("A propriedade dataHoraEncerramento deve ser maior que a data hora atual");
-		}
+		if (Objects.isNull(dataHoraEncerramento)) {
+	        throw new BusinessException("A dataHoraEncerramento não pode ser nula");
+	    }
+
+	    if (dataHoraEncerramento.isBefore(LocalDateTime.now())) {
+	        throw new BusinessException("A propriedade dataHoraEncerramento deve ser maior que a data hora atual");
+	    }
 		
 	}
 	

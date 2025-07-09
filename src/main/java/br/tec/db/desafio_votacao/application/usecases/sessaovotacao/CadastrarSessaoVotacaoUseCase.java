@@ -1,6 +1,7 @@
 package br.tec.db.desafio_votacao.application.usecases.sessaovotacao;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 import org.springframework.stereotype.Component;
@@ -38,10 +39,12 @@ public class CadastrarSessaoVotacaoUseCase {
 	
 	private void validaSeExistemSessoesAbertas(final SessaoVotacao sessaoVotacao) {
 		final LocalDateTime dataHoraInicio = LocalDateTime.now();
+		final LocalDateTime dataHoraInicioSemSegundos = dataHoraInicio.truncatedTo(ChronoUnit.MINUTES);
 		final LocalDateTime dataHoraFim = sessaoVotacao.getDataHoraEncerramento();
+		final LocalDateTime dataHoraFimSemSegundos = dataHoraFim.truncatedTo(ChronoUnit.MINUTES);
 		final Long idPauta = sessaoVotacao.getPauta().getId();
 		
-		if(sessaoVotacaoRepository.existemSessoesAbertasParaEssaPauta(dataHoraInicio, dataHoraFim, idPauta)) {
+		if(sessaoVotacaoRepository.existemSessoesAbertasParaEssaPauta(dataHoraInicioSemSegundos, dataHoraFimSemSegundos, idPauta)) {
 			throw new BusinessException("A pauta já possui uma sessão de votação em andamento.");
 		}
 	}
@@ -54,7 +57,9 @@ public class CadastrarSessaoVotacaoUseCase {
 		sessaoVotacao.setDataHoraInclusao(LocalDateTime.now());
 		
 		if(Objects.isNull(sessaoVotacao.getDataHoraEncerramento())) {
-			sessaoVotacao.setDataHoraEncerramento(LocalDateTime.now().plusMinutes(1));
+			LocalDateTime dataHoraEncerramento = LocalDateTime.now().plusMinutes(1);
+			LocalDateTime dataHoraEncerramentoSemSegundos = dataHoraEncerramento.truncatedTo(ChronoUnit.MINUTES);
+			sessaoVotacao.setDataHoraEncerramento(dataHoraEncerramentoSemSegundos);
 		}
 		
 		return sessaoVotacao;
