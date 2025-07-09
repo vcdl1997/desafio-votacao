@@ -1,7 +1,20 @@
-
-# Comando para criar os containers dentro de um agrupamento: docker-compose sistema_votacao up -d
-
 services:
+
+  api:
+    container_name: api
+    build:
+        context: ./
+        dockerfile: ./Dockerfile.java
+    ports:
+      - '8080:8080'
+    networks:
+      - desafio_votacao
+    depends_on:
+      - postgres
+    restart: always
+    stdin_open: true
+    tty: true
+
   postgres:
     container_name: postgres
     image: postgres:16
