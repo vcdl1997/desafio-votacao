@@ -27,7 +27,7 @@ public class VotoRequestDTO {
 	
 	@NotBlank
 	@Pattern(regexp = "^\\d*$", message = MENSAGEM_FORMATO_ID)
-	private String idAssocidado;
+	private String idAssociado;
 	
 	@NotBlank
 	@Pattern(regexp = "^(SIM|NAO)$", message = MENSAGEM_FORMATO_RESPOSTA_VOTO)

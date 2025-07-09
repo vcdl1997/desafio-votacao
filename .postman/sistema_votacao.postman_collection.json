@@ -326,7 +326,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idSessaoVotacao\": 2,\r\n    \"idAssocidado\": 1,\r\n    \"respostaVoto\": \"SIM\"\r\n}",
+							"raw": "{\r\n    \"idSessaoVotacao\": 2,\r\n    \"idAssociado\": 1,\r\n    \"respostaVoto\": \"SIM\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

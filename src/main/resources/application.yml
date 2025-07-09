@@ -19,9 +19,10 @@ spring:
       max-lifetime: 600000 # tempo máximo que uma conexão pode ficar viva
   jpa:
     hibernate:
-      ddl-auto: create-drop # esta sendo usado apenas por ser um teste
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # converte os nomes para snake_case igual ao padrão do banco de dados
+    defer-datasource-initialization: true
     open-in-view: false 
     show-sql: true
     properties:
@@ -30,9 +31,10 @@ spring:
         generate_statistics: true
         connection:
           provider_disables_autocommit: true
-  cache:
-    cache-names:
-    - contador-consultas
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:db/init.sql
 
 logging:
   level:

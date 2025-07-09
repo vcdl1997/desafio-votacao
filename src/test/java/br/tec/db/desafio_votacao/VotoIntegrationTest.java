@@ -46,7 +46,7 @@ public class VotoIntegrationTest extends AbstractIntegrationTest {
     public void testDeveCadastrarVotoComSucesso() throws Exception {
     	VotoRequestDTO dto = VotoRequestDTO
     		.builder()
-    		.idAssocidado(this.associado.getId().toString())
+    		.idAssociado(this.associado.getId().toString())
     		.idSessaoVotacao(this.sessaoVotacao.getId().toString())
     		.respostaVoto("SIM")
     		.build()
@@ -75,7 +75,7 @@ public class VotoIntegrationTest extends AbstractIntegrationTest {
             .content(jsonVazio))
             .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("idSessaoVotacao")))
-            .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("idAssocidado")))
+            .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("idAssociado")))
             .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("respostaVoto")));
     }
     
@@ -86,7 +86,7 @@ public class VotoIntegrationTest extends AbstractIntegrationTest {
     	super.salvarVoto(this.sessaoVotacao, this.associado, RespostaVotoEnum.SIM);
     	VotoRequestDTO dto = VotoRequestDTO
     		.builder()
-    		.idAssocidado(this.associado.getId().toString())
+    		.idAssociado(this.associado.getId().toString())
     		.idSessaoVotacao(this.sessaoVotacao.getId().toString())
     		.respostaVoto("SIM")
     		.build()
@@ -107,7 +107,7 @@ public class VotoIntegrationTest extends AbstractIntegrationTest {
     public void testDeveFalharAoTentarCadastrarUmVotoDeUmAssociadoQueNaoExiste() throws Exception {
     	VotoRequestDTO dto = VotoRequestDTO
     		.builder()
-    		.idAssocidado(this.faker.number().digits(11))
+    		.idAssociado(this.faker.number().digits(11))
     		.idSessaoVotacao(this.sessaoVotacao.getId().toString())
     		.respostaVoto("SIM")
     		.build()
@@ -128,7 +128,7 @@ public class VotoIntegrationTest extends AbstractIntegrationTest {
     public void testDeveFalharAoTentarCadastrarUmVotoDeUmaSessaoVotacaoQueNaoExiste() throws Exception {
     	VotoRequestDTO dto = VotoRequestDTO
     		.builder()
-    		.idAssocidado(this.associado.getId().toString())
+    		.idAssociado(this.associado.getId().toString())
     		.idSessaoVotacao(this.faker.number().digits(11))
     		.respostaVoto("SIM")
     		.build()
@@ -151,7 +151,7 @@ public class VotoIntegrationTest extends AbstractIntegrationTest {
     	
     	VotoRequestDTO dto = VotoRequestDTO
     		.builder()
-    		.idAssocidado(this.associado.getId().toString())
+    		.idAssociado(this.associado.getId().toString())
     		.idSessaoVotacao(this.sessaoVotacao.getId().toString())
     		.respostaVoto("SIM")
     		.build()

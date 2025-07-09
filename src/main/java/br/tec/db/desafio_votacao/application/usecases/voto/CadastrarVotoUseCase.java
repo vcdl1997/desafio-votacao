@@ -57,7 +57,7 @@ public class CadastrarVotoUseCase {
 	}
 	
 	private VotoId obterIdentificadorVoto(final VotoRequestDTO dto) {
-		final Long idAssociado = Long.valueOf(dto.getIdAssocidado());
+		final Long idAssociado = Long.valueOf(dto.getIdAssociado());
 		final Long idSessaoVotacao = Long.valueOf(dto.getIdSessaoVotacao());
 		final Associado associado = obterAssociado(idAssociado);
 		final SessaoVotacao sessaoVotacao = obterSessaoVotacao(idSessaoVotacao);
