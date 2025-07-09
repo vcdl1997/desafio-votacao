@@ -25,7 +25,7 @@ Após instalar todas as ferramentas necessárias, siga os passos abaixo para ini
   Esse comando irá iniciar:
   * 🐘 PostgreSQL: Banco de dados utilizado para persistência das informações da aplicação.
   * ☕ Aplicação Java: Serviço principal do sistema de votação.
-  * 🧪 JMeter: Ferramenta utilizada para testes de carga e stress da aplicação.
+  * 🧪 Locust: Ferramenta utilizada para testes de carga e stress da aplicação.
 
   💡 Observação: Caso deseje executar a aplicação diretamente pela IDE (sem Docker), altere a propriedade spring.datasource.url no application.yml para:
   ```sh
@@ -51,7 +51,7 @@ Após instalar todas as ferramentas necessárias, siga os passos abaixo para ini
 
 Agora seu ambiente de desenvolvimento está configurado e pronto para uso!
 
-## 🏗️ 2. Arquitetura do Projeto (`app/`)
+## 🏗️ 2. Arquitetura do Projeto
 
 A pasta `src/main/java` foi organizada em camadas para separar cada uma das responsabilidades do sistema e facilitar a manutenção, testabilidade do mesmo. Essa estrutura segue os princípios da Clean Architecture, onde cada camada tem uma função clara e bem definida.
 
@@ -70,7 +70,7 @@ A pasta `src/main/java` foi organizada em camadas para separar cada uma das resp
     - **votos/**  
     - **pautas/**
   - **mappers/**: Mapeadores responsáveis por converter entre entidades e DTOs.  
-  - **usecases/**: Casos de uso da aplicação, organizados por recurso.  
+  - **usecases/**: Casos de uso da aplicação, organizados por recurso, seguindo o **Princípio da Responsabilidade Única**.  
     - **associados/**  
     - **sessoes/**  
     - **votos/**  
@@ -78,9 +78,9 @@ A pasta `src/main/java` foi organizada em camadas para separar cada uma das resp
 
 - **domain/**  
   Camada central das regras de negócio.  
-  - **entities/**: Entidades do domínio, contendo as regras e comportamentos essenciais.  
+  - **entities/**: Entidades do domínio com regras e comportamentos essenciais (**A lógica de negócio pertence ao domínio**)
   - **enums/**: Enumerações utilizadas no contexto do domínio.  
-  - **repositories/**: Interfaces de repositórios, que descrevem as operações de persistência.  
+  - **repositories/**: Interfaces que definem os contratos de persistência. A aplicação depende apenas desses contratos, e não das implementações concretas (**Princípio da Inversão de Dependência**).
   - **vo/**: Value Objects, representando conceitos imutáveis do domínio.
 
 - **infrastructure/**  
@@ -136,4 +136,7 @@ Para monitorar o status do container, basta abrir um terminal paralelo e rodar o
 ```bash
   docker stats api
 ```
+
+Abaixo segue um vídeo de exemplo de como usar o Locust para realizar testes de stress: [Teste de Stress com Locust](https://github.com/vcdl1997/desafio-votacao/tutorial_locust.mp4)
+
 
