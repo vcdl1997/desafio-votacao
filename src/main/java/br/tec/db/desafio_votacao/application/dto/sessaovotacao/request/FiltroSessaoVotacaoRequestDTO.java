@@ -23,6 +23,4 @@ public class FiltroSessaoVotacaoRequestDTO {
 	@Pattern(regexp = "^\\d*$", message = MENSAGEM_FILTRO_ID)
 	private String idPauta;
 	
-	
-	
 }

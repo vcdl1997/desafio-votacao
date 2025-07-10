@@ -27,12 +27,18 @@ Após instalar todas as ferramentas necessárias, siga os passos abaixo para ini
   * ☕ Aplicação Java: Serviço principal do sistema de votação.
   * 🧪 Locust: Ferramenta utilizada para testes de carga e stress da aplicação.
 
-  💡 Observação: Caso deseje executar a aplicação diretamente pela IDE (sem Docker), altere a propriedade spring.datasource.url no application.yml para:
+  💡 **Observação Importante**: Caso deseje executar a aplicação diretamente pela IDE (sem Docker), altere a propriedade spring.datasource.url no application.yml para:
   ```sh
     spring.datasource.url: jdbc:postgresql://localhost:5432/db_server
    ```
 
-2. Importando a Collection do Postman (**Extra**)
+2. Documentação da API
+  A documentação interativa da API está disponível via Swagger UI, permitindo que você explore os endpoints, visualize os contratos e até mesmo faça requisições de teste.
+  Você pode acessar a documentação no seguinte link:
+  [http://localhost:8080/desafio-votacao/swagger-ui/index.html](http://localhost:8080/desafio-votacao/swagger-ui/index.html)
+
+
+3. Importando a Collection do Postman (**Extra**)
 
    Para facilitar o consumo da API, utilize a collection do Postman disponível na pasta `.postman` do projeto.
 

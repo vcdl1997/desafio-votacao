@@ -20,7 +20,7 @@ import br.tec.db.desafio_votacao.domain.entities.Pauta;
 import br.tec.db.desafio_votacao.domain.entities.SessaoVotacao;
 import br.tec.db.desafio_votacao.domain.enums.RespostaVotoEnum;
 
-@SpringBootTest(classes = br.tec.db.desafio_votacao.application.DesafioVotacaoApplication.class)
+@SpringBootTest(classes = br.tec.db.desafio_votacao.DesafioVotacaoApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
 @DisplayName("Testes de Integração - Votos")

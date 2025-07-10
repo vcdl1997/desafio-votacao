@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.tec.db.desafio_votacao.application.controller.v1.docs.AssociadoV1ApiDocs;
 import br.tec.db.desafio_votacao.application.dto.associado.request.AtualizacaoAssociadoRequestDTO;
 import br.tec.db.desafio_votacao.application.dto.associado.request.CadastroAssociadoRequestDTO;
 import br.tec.db.desafio_votacao.application.dto.associado.request.FiltroAssociadoRequestDTO;
@@ -30,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping(value = "/v1/associados")
 @RequiredArgsConstructor
-public class AssociadoV1Controller {
+public class AssociadoV1Controller implements AssociadoV1ApiDocs {
 	
 	private final ListarAssociadosUseCase listarAssociados;
 	private final ObterAssociadoPorIdUseCase obterAssociadoPorId;
@@ -38,21 +39,18 @@ public class AssociadoV1Controller {
 	private final AtualizarAssociadoUseCase atualizarAssociado;
 
 	@GetMapping
-	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<Page<AssociadoResponseDTO>> listar(final @Valid FiltroAssociadoRequestDTO dto, final Pageable pageable){
 		Page<AssociadoResponseDTO> response = listarAssociados.executar(dto, pageable);
 		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/{id}")
-	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<AssociadoResponseDTO> obterPorId(final @PathVariable Long id){
 		AssociadoResponseDTO response = obterAssociadoPorId.executar(id);
 		return ResponseEntity.ok(response);
 	}
 	
 	@PostMapping
-	@ResponseStatus(code = HttpStatus.CREATED)
 	public ResponseEntity<AssociadoResponseDTO> cadastrar(
 		final @Valid @RequestBody CadastroAssociadoRequestDTO dto, 
 		final UriComponentsBuilder uriBuilder
@@ -65,7 +63,7 @@ public class AssociadoV1Controller {
 	@PutMapping("/{id}")
 	@ResponseStatus(code = HttpStatus.OK)
 	public ResponseEntity<AssociadoResponseDTO> atualizar(
-		final @PathVariable Long id, 
+		final @PathVariable(name = "id") Long id, 
 		final @Valid @RequestBody AtualizacaoAssociadoRequestDTO dto
 	) {
 		AssociadoResponseDTO response = atualizarAssociado.executar(id, dto);
