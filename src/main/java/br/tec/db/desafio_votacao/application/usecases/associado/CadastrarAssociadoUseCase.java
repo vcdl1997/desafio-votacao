@@ -10,6 +10,7 @@ import br.tec.db.desafio_votacao.application.dto.associado.response.AssociadoRes
 import br.tec.db.desafio_votacao.application.mappers.AssociadoMapper;
 import br.tec.db.desafio_votacao.domain.entities.Associado;
 import br.tec.db.desafio_votacao.domain.repositories.AssociadoRepository;
+import br.tec.db.desafio_votacao.shared.exceptions.BusinessException;
 import lombok.RequiredArgsConstructor;
 
 @Component
@@ -21,14 +22,23 @@ public class CadastrarAssociadoUseCase {
 
 	@Transactional(timeout = 1)
 	public AssociadoResponseDTO executar(final CadastroAssociadoRequestDTO dto) {
-		Associado associado = repository.salvar(prepararAssociadoParaInclusao(dto));
-		return mapper.associadoParaAssociadoResponseDTO(associado);
+		Associado associado = prepararAssociadoParaInclusao(dto);
+
+		validaSeExistemAssociadosUsandoEsteCpf(associado.getCpf());
+		
+		return mapper.associadoParaAssociadoResponseDTO(repository.salvar(associado));
     }
 	
 	private Associado prepararAssociadoParaInclusao(final CadastroAssociadoRequestDTO dto) {
 		Associado associado = mapper.cadastroAssociadoRequestDTOParaAssociado(dto);
 		associado.setDataHoraInclusao(LocalDateTime.now());
 		return associado;
+	}
+
+	private void validaSeExistemAssociadosUsandoEsteCpf(final Long cpf) {
+		if(repository.existemUsuariosComEsteCpf(cpf)){
+			throw new BusinessException("Este CPF já está em uso por outro associado.");
+		}
 	}
 	
 }

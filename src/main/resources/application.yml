@@ -7,7 +7,7 @@ spring:
   application:
     name: desafio-votacao
   datasource:
-    url: jdbc:postgresql://postgres:5432/db_server #jdbc:postgresql://localhost:5432/db_server (para rodar através da IDE)
+    url: jdbc:postgresql://${HOST:postgres}:5432/db_server #jdbc:postgresql://localhost:5432/db_server (para rodar através da IDE)
     username: sistema_votacao
     password: uj9Gi7Pw8DiMoxn
     driver-class-name: org.postgresql.Driver

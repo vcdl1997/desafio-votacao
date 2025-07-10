@@ -5,6 +5,8 @@ services:
     build:
         context: ./
         dockerfile: ./Dockerfile.java
+    environment:
+      HOST: postgres
     ports:
       - '8080:8080'
     networks:

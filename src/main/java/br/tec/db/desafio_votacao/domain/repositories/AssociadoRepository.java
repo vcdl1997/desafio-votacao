@@ -15,5 +15,7 @@ public interface AssociadoRepository {
 	Optional<Associado> obterPorId(Long id);
 	
 	Associado salvar(Associado associado);
+
+	boolean existemUsuariosComEsteCpf(Long cpf);
 	
 }

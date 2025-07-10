@@ -121,8 +121,20 @@ public class AssociadoIntegrationTest extends AbstractIntegrationTest {
             .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("email")));
     }
     
-    @Test
     @Order(7)
+    @DisplayName("Deve falhar ao cadastrar um novo associado utilizando um CPF que já está está vinculado a outro associado.")
+    public void testDeveFalharAoCadastrarUmNovoAssociadoUtilizandoUmCpfQueJaEstaVinculadoAOutroAssociado() throws Exception {
+    	String associadoJson = mapper.writeValueAsString(this.associado);
+    	
+        mockMvc
+            .perform(MockMvcRequestBuilders.post(RECURSO)
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(associadoJson))
+            .andExpect(MockMvcResultMatchers.status().isUnprocessableEntity());
+    }
+    
+    @Test
+    @Order(8)
     @DisplayName("Deve atualizar um associado com sucesso.")
     public void testDeveAtualizarUmAssociadoComSucesso() throws Exception {
     	String urlPath = new StringBuilder().append(RECURSO).append("/").append(this.associado.getId()).toString();
@@ -142,7 +154,7 @@ public class AssociadoIntegrationTest extends AbstractIntegrationTest {
     }
     
     @Test
-    @Order(8)
+    @Order(9)
     @DisplayName("Deve falhar ao tentar atualizar um associado que não existe.")
     public void testDeveFalharAoTentarAtualizarUmAssociadoQueNaoExiste() throws Exception {
     	String urlPath = new StringBuilder().append(RECURSO).append("/").append(this.faker.number().digits(11)).toString();
@@ -157,7 +169,7 @@ public class AssociadoIntegrationTest extends AbstractIntegrationTest {
     }
     
     @Test
-    @Order(9)
+    @Order(10)
     @DisplayName("Deve falhar ao tentar atualizar um associado com os campos do body nulos.")
     public void testDeveFalharAoTentarAtualizarUmAssociadoComOsCamposDoBodyNulos() throws Exception {
     	String urlPath = new StringBuilder().append(RECURSO).append("/").append(this.associado.getId()).toString();

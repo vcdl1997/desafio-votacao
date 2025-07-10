@@ -55,14 +55,22 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	
 	@Override
 	public Optional<Associado> obterPorId(Long id) {
-		Objects.requireNonNull(id, "ID do Associado não foi informado");
+		Objects.requireNonNull(id, "ID do Associado não pode ser nulo");
 
 		return jpaRepository.findById(id);
 	}
 	
 	@Override
 	public Associado salvar(Associado associado) {
+		Objects.requireNonNull(associado, "Associado não pode ser nulo");
 		return jpaRepository.save(associado);
 	}
+
+	@Override
+	public boolean existemUsuariosComEsteCpf(Long cpf) {
+		Objects.requireNonNull(cpf, "CPF não pode ser nulo");
+		return jpaRepository.existsByCpf(cpf);
+	}
+
 	
 }

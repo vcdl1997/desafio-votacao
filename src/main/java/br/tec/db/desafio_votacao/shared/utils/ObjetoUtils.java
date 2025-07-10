@@ -6,7 +6,7 @@ import java.util.Objects;
 public class ObjetoUtils {
 
 	public static void requireNonNull(String mensagem, Object... valores) {
-		Objects.requireNonNull(mensagem, "Mensagem de erro não informada");
+		Objects.requireNonNull(mensagem, "Mensagem de erro não pode ser nulo");
 		Arrays.asList(valores).stream().forEach(valor -> Objects.requireNonNull(valor));
 	}
 	

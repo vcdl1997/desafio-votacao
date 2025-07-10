@@ -7,4 +7,6 @@ import br.tec.db.desafio_votacao.domain.entities.Associado;
 
 public interface SpringDataAssociadoRepository extends JpaRepository<Associado, Long>, JpaSpecificationExecutor<Associado>{
 
+    boolean existsByCpf(Long cpf);
+
 }

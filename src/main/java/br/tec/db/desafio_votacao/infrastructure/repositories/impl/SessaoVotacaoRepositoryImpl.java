@@ -45,7 +45,7 @@ public class SessaoVotacaoRepositoryImpl implements SessaoVotacaoRepository {
 	
 	@Override
 	public Optional<SessaoVotacao> obterPorId(Long id) {
-		Objects.requireNonNull(id, "ID da Sessão Votação não foi informado");
+		Objects.requireNonNull(id, "ID da Sessão Votação não pode ser nulo");
 
 		return jpaRepository.findById(id);
 	}
