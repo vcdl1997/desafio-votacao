@@ -71,16 +71,17 @@ A pasta `src/main/java` foi organizada em camadas para separar cada uma das resp
   - **dto/**: Objetos de transferência de dados. Organizados por recurso.  
     - **associados/**  
       - **request/**: DTOs utilizados para entrada de dados.  
-      - **response/**: DTOs utilizados para retorno dos dados.  
-    - **sessoes/**  
-    - **votos/**  
-    - **pautas/**
+      - **response/**: DTOs utilizados para retorno dos dados.
+    - **associado/**
+    - **pauta/**
+    - **sessaovotacao/**  
+    - **voto/**  
   - **mappers/**: Mapeadores responsáveis por converter entre entidades e DTOs.  
   - **usecases/**: Casos de uso da aplicação, organizados por recurso, seguindo o **Princípio da Responsabilidade Única**.  
-    - **associados/**  
-    - **sessoes/**  
-    - **votos/**  
-    - **pautas/**
+    - **associado/**
+    - **pauta/**
+    - **sessaovotacao/**  
+    - **voto/**  
 
 - **domain/**  
   Camada central das regras de negócio.  
