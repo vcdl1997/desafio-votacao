@@ -81,7 +81,8 @@ public class AssociadoIntegrationTest extends AbstractIntegrationTest {
     @Order(4)
     @DisplayName("Deve falhar ao tentar buscar um associado com um ID inexistente.")
     public void testDeveFalharAoBuscarUmAssociadoComUmIDInexistente() throws Exception {
-    	String urlPath = new StringBuilder().append(RECURSO).append("/").append(this.faker.number().digits(11)).toString();
+    	Long idAssociado = Long.valueOf(this.faker.number().digits(11));
+    	String urlPath = new StringBuilder().append(RECURSO).append("/").append(idAssociado).toString();
     	
         mockMvc
             .perform(MockMvcRequestBuilders.get(urlPath))

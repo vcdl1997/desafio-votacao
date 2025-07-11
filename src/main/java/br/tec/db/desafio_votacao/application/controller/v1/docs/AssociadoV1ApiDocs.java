@@ -50,7 +50,7 @@ public interface AssociadoV1ApiDocs {
         @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
     })
 	@ResponseStatus(code = HttpStatus.OK)
-    ResponseEntity<AssociadoResponseDTO> obterPorId(final @PathVariable Long id);
+    ResponseEntity<AssociadoResponseDTO> obterPorId(final @PathVariable(name = "id") Long id);
 
     @Operation(
         summary = "Cadastrar um novo associado",

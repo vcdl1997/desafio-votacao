@@ -45,7 +45,7 @@ public class AssociadoV1Controller implements AssociadoV1ApiDocs {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<AssociadoResponseDTO> obterPorId(final @PathVariable Long id){
+	public ResponseEntity<AssociadoResponseDTO> obterPorId(final @PathVariable(name = "id") Long id){
 		AssociadoResponseDTO response = obterAssociadoPorId.executar(id);
 		return ResponseEntity.ok(response);
 	}
