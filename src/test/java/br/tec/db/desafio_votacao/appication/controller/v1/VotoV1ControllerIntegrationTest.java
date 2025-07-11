@@ -1,4 +1,4 @@
-package br.tec.db.desafio_votacao;
+package br.tec.db.desafio_votacao.appication.controller.v1;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +24,7 @@ import br.tec.db.desafio_votacao.domain.enums.RespostaVotoEnum;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
 @DisplayName("Testes de Integração - Votos")
-public class VotoIntegrationTest extends AbstractIntegrationTest {
+public class VotoV1ControllerIntegrationTest extends AbstractIntegrationTest {
 
     private final String RECURSO = "/v1/votos";
     

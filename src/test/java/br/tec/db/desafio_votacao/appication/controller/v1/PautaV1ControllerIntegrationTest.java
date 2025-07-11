@@ -1,4 +1,4 @@
-package br.tec.db.desafio_votacao;
+package br.tec.db.desafio_votacao.appication.controller.v1;
 
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ import br.tec.db.desafio_votacao.domain.entities.Pauta;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
 @DisplayName("Testes de Integração - Pautas")
-public class PautaIntegrationTest extends AbstractIntegrationTest {
+public class PautaV1ControllerIntegrationTest extends AbstractIntegrationTest {
 
     private final String RECURSO = "/v1/pautas";
     

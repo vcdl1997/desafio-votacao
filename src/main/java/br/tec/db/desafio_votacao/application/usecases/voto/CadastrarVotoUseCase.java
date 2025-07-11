@@ -28,7 +28,7 @@ public class CadastrarVotoUseCase {
 	private final VotoRepository votoRepository;
 	private final VotoMapper votoMapper;
 	
-	@Transactional(timeout = 1)
+	@Transactional(timeout = 2)
 	public VotoResponseDTO executar(final VotoRequestDTO dto) {
 		Voto voto = prepararParaInclusao(dto);
 		

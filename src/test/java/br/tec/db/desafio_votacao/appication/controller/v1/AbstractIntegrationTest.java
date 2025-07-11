@@ -1,4 +1,4 @@
-package br.tec.db.desafio_votacao;
+package br.tec.db.desafio_votacao.appication.controller.v1;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

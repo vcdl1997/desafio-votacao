@@ -1,4 +1,4 @@
-package br.tec.db.desafio_votacao;
+package br.tec.db.desafio_votacao.appication.controller.v1;
 
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,7 +18,7 @@ import br.tec.db.desafio_votacao.domain.entities.Associado;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 @AutoConfigureMockMvc
 @DisplayName("Testes de Integração - Associados")
-public class AssociadoIntegrationTest extends AbstractIntegrationTest {
+public class AssociadoV1ControllerIntegrationTest extends AbstractIntegrationTest {
     
     private final String RECURSO = "/v1/associados";
     
