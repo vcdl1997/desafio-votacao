@@ -42,10 +42,6 @@ public class SessaoVotacao extends AbstractEntity<Long> {
 	
 	public void validarRegrasDeNegocioParaInclusao() {
 		ObjetoUtils.requireNonNull("Valor não informado", dataHoraEncerramento);
-		
-		if (Objects.isNull(dataHoraEncerramento)) {
-	        throw new BusinessException("A dataHoraEncerramento não pode ser nula");
-	    }
 
 	    if (dataHoraEncerramento.isBefore(LocalDateTime.now())) {
 	        throw new BusinessException("A propriedade dataHoraEncerramento deve ser maior que a data hora atual");
